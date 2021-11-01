@@ -1,6 +1,5 @@
+# Mitschrift Video GitHub Actions - Part 1
 https://youtu.be/R5ppadIsGbA
-
-# Mitschrift Video GitHub Actions part 1
 
 - erstelle Azure Account für Education
 - erstelle beliebiges Repo auf github
@@ -49,3 +48,30 @@ https://youtu.be/R5ppadIsGbA
     - --no-restore makes it faster, because we did that step just before
     - fyi - The main difference between Build and Release in Software Testing is that Build is a version of a software the development team hands over to the testing team for testing purposes while Release is a software the testing team hands over to the customer. 
   - fyi: **dotnet --help** shows help, if needed 
+
+
+# Mitschrift Video GitHub Actions - Part 1
+https://youtu.be/ySVsLE0XWQA
+
+## Add Unit Testing
+- Open the solution in Visual Studio
+- Neues Projekt hinzufügen. Rechtsklick auf Solution -> Hinzufügen -> Neues Projekt -> xUnit Test Project (.NET Core) for C# -> AnimalCountingDatabase.Tests
+- Change to .Net 5. If you click on the Solution and the csproj file opens you can see that an older version of .net core is installed.
+  - So Right Click the Solution -> Properties -> Change the Target Framwork to .NET 5.0 and save it
+  - Also Right Click Solution -> Manage NuGet Packages -> an ceck if Updates are empty -> If not update them
+  - Add a Test, e.g. 
+    ```csharp
+    public void Test1()
+    {
+        Assert.True(1 == 1);
+    }
+    ```
+  - Make sure this Tests runs
+  - Switch to Visual Studio Code again
+  - Add a new step to the yaml file which runs the tests, find more detailed info here https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test
+  ```yaml 
+    - name: Run automated tests
+      run: dotnet test -c Release --no-build
+  ```
+  - 06:50 check in everything and see if it runs on github
+  - !!!!! Always write and run automated tests !!!!!!
