@@ -74,4 +74,11 @@ https://youtu.be/ySVsLE0XWQA
       run: dotnet test -c Release --no-build
   ```
   - 06:50 check in everything and see if it runs on github
+    - if something is failing, create an issue e.g. Broken Build. Describe it, e.g. investigate why it's failing and resolve it
+      - if you add into the git message resolves #x, e.g. Fixed Unit tests, resolves #1, then the issue get automatically closed by github.com --> **Best Practice**
   - !!!!! Always write and run automated tests !!!!!!
+  - !!!!! Always write and run automated tests !!!!!!
+  - !!!!! Always write and run automated tests !!!!!!
+  - 21:40 Hinweis: you can connect sonarcloud.io to your github account --> scans your code for bugs, vulneratbilites and code smells in more than 20 programming languages
+    - There is a github action called sonarcloud-scan which you can use 
+
