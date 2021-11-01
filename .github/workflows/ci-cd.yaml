@@ -7,8 +7,9 @@ on:
   # immer wenn jemand Code in das Repo push wird es ausgeführt
   push:
     # immer wenn jemand Code in den main - Branch pusth, CI/CD wird gestartet
+    # falls noch alte Settings in deinem Github Account, verwende hier Master.
     branches:
-      - main 
+      - master 
 
 # Workflows are made up of one or more jobs and can be scheduled or triggered by an event
 # https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions
