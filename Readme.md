@@ -36,7 +36,11 @@ https://youtu.be/R5ppadIsGbA
     name: Build the App 
     run: dotnet build -c Release --no-restore
     ```
-    
+   
+- Push the Code to the Repo and the Build of the App will start
+  - Check that on the github Webpage in the Actions Section
+
+
 ## Exkurs - how to build a .net Application in the CLI
   - Open a Terminal in Code (Folder of the solution)
   - run **dotnet restore** It fetches all the necessary nugget packages and installs them locally
