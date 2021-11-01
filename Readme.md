@@ -1,4 +1,4 @@
-# Mitschrift Video GitHub Actions - Part 1 
+# Mitschrift Video C# ASP.NET 5 - CI/CD With GitHub Actions - Part 1 
 https://youtu.be/R5ppadIsGbA
 
 - erstelle Azure Account für Education
@@ -50,7 +50,7 @@ https://youtu.be/R5ppadIsGbA
   - fyi: **dotnet --help** shows help, if needed 
 
 
-# Mitschrift Video GitHub Actions - Part 1
+# Mitschrift Video C# ASP.NET 5 - CI/CD With GitHub Actions - Part 2
 https://youtu.be/ySVsLE0XWQA
 
 ## Add Unit Testing
@@ -125,4 +125,9 @@ Veröffentlichen: Code Runtimestapel:
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_SECRET }}
           package: ./out
       ``` 
-      - push all the stuff to github
+      - push all the stuff to github and hope that the CI/CD process works out
+        - if the build is successfull open the Link of the azure web app API followed by the endpoint, in our case "weatherforecast"
+          - e.g. https://davids-first-webapp.azurewebsites.net/weatherforecast  
+
+# Mitschrift C# ASP.NET 5 - CI/CD With GitHub Actions - Part 3
+https://youtu.be/MhEa8fENJqM
