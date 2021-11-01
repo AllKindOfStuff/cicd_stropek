@@ -1,11 +1,41 @@
+# Hilfe: https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions
 # name: ist der Name des Workflows, kann selbst gewählt werden
 name: Continuous Integration and WDeployment
 
-# Festlegen wann diese Github Action laufen soll
+# Setup: Festlegen wann diese Github Action laufen soll
 on: 
   # immer wenn jemand Code in das Repo push wird es ausgeführt
   push:
     # immer wenn jemand Code in den main - Branch pusth, CI/CD wird gestartet
     branches:
       - main 
+
+# Workflows are made up of one or more jobs and can be scheduled or triggered by an event
+# https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions
+# wir halten es einfach und haben nur einen Job, können auch mehrere sein
+jobs:
+  # dem Job einen Namen geben, kann selbst gewählt werden
+  build:
+    # Plattform (OS) wo gebuildet werden soll
+    runs-on: ubuntu-20.04
+    # define necessary steps: e.g. set environment variables, use secrets (e.g. DB-Password), define multiple Plattforms, etc.
+    
+    steps: 
+      # Name der Steps kann selbst vergeben werden 
+      - name: Check out Code
+        # uses sagt welche Action verwendet wird
+        uses: actions/checkout@v2
+        
+      # sicherstellen, dass unsere benötigte .net Version auf dem Server installiert ist  
+      - name: Setup .NET 5  
+        uses: actions/setup-dotnet@v1
+        with:
+            dotnet-version: '5.0.x'
+
+      # Applikation bauen - wie wenn man ein Projekt händisch kompilieren würde
+      - name: Restore dependencies
+        run: dotnet restore
+      
+      - name: Build the App
+        run: dotnet build -c Release --no-restore
       
