@@ -10,7 +10,6 @@ on:
     # falls noch alte Settings in deinem Github Account, verwende hier Master.
     branches:
       - main
-
 # Workflows are made up of one or more jobs and can be scheduled or triggered by an event
 # https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions
 # wir halten es einfach und haben nur einen Job, können auch mehrere sein
@@ -43,3 +42,4 @@ jobs:
       # Step für Testläufe hinzufügen
       - name: Run automated tests
         run: dotnet test -c Release --no-build
+
