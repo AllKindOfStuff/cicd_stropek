@@ -1,4 +1,4 @@
-# Mitschrift Video GitHub Actions - Part 1
+# Mitschrift Video GitHub Actions - Part 1 
 https://youtu.be/R5ppadIsGbA
 
 - erstelle Azure Account für Education
@@ -82,3 +82,47 @@ https://youtu.be/ySVsLE0XWQA
   - 21:40 Hinweis: you can connect sonarcloud.io to your github account --> scans your code for bugs, vulneratbilites and code smells in more than 20 programming languages
     - There is a github action called sonarcloud-scan which you can use 
 
+
+## 22:02 Now switch from Continuous Integration to Continuous Deployment
+- Take the build results and put them into the target environment (in our case azure)
+- Create an App service plan in azure
+  - inside the App service plan create an web App
+    - here we want to deploy our code directly from github actions
+  - Nach App Service-Pläne suchen -> App Service-Plan erstellen --> 
+  Abonnement: TestResource
+  Name: davids-linux-web-plan
+  Betriebssystem: Linux
+  Region: West Europe
+  SKU: Free
+  ACU: Freigegebene Infrastruktur
+  Speicher: 1 GB Arbeitsspeicher
+  - in der TestResource davids-linux-web-plan eine Web-App erstellen: Name: davids-first-webapp
+Veröffentlichen: Code Runtimestapel: 
+.NET 5
+
+### Authentication
+- how can we put code to Azure , who is allowed to
+  - 2 possibilites
+    - Access Control  via a Service Principle -> professional way, we are not doing this
+    - Publish Profile -> we are using that
+      -  go to your web-app on azure and click on  "Get Publish Profile" -> an xml File will be downloaded -> copy the content, which are security sensitive informations, do not publish this file!!
+      -  we will set this information as so called github secret
+      -  go to your github repo -> got to Settings -> Secrets -> Create new repository secret -> Name it AZURE_WEBAPP_PUBLISH_SECRET Usually written in capital letters -> Paste the content of the xml File. -> After the secret became created, you can't read it again
+   -  switch back to your yaml File
+      - add the following code to your yaml to **publish** the code
+      ```yaml
+      - name: Publish App
+        run: dotnet publish -c Release -o ./out
+      ```  
+      - 33:03 we use a new GitHub Action for **deploying** to Azure Web App: Azure/webapps-deploy  https://github.com/Azure/webapps-deploy
+      ```yaml
+      - name: Deploy to Azure Web Apps
+        uses: azure/webapps-deploy@v2
+        with:
+          # name of the app where we want to deploy our code to, get it from your azure environemnt 
+          app-name: davids-first-webapp
+          # here you have to enter the reference to your github secret
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_SECRET }}
+          package: ./out
+      ``` 
+      - push all the stuff to github

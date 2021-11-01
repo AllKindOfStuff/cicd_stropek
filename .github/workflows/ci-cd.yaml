@@ -10,6 +10,10 @@ on:
     # falls noch alte Settings in deinem Github Account, verwende hier Master.
     branches:
       - main
+
+# you could define Environment Variables
+# e.g. "env: DOTNET_VERSION: '5.0.x"
+
 # Workflows are made up of one or more jobs and can be scheduled or triggered by an event
 # https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions
 # wir halten es einfach und haben nur einen Job, können auch mehrere sein
@@ -31,6 +35,7 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
             dotnet-version: '5.0.x'
+            # or you could use an Environment variable "dotnet-version: ${{env.DOTNET_VERSION}}
 
       # Applikation bauen - wie wenn man ein Projekt händisch kompilieren würde
       - name: Restore dependencies
@@ -42,4 +47,20 @@ jobs:
       # Step für Testläufe hinzufügen
       - name: Run automated tests
         run: dotnet test -c Release --no-build
+
+      # specify where to find the application that should be published
+      - name: Publish App
+        run: dotnet publish -c Release -o ./out
+
+      # Auf Azure deployen
+      - name: Deploy to Azure Web Apps
+        uses: azure/webapps-deploy@v2
+        with:
+          # name of the app where we want to deploy our code to, get it from your azure environemnt 
+          app-name: davids-first-webapp
+          # here you have to enter the reference to your github secret
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_SECRET }}
+          package: ./out
+          
+
 
