@@ -1,6 +1,6 @@
 # Hilfe: https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions
 # name: ist der Name des Workflows, kann selbst gewählt werden
-name: Continuous Integration and WDeployment
+name: Continuous Integration and Deployment 
 
 # Setup: Festlegen wann diese Github Action laufen soll
 on: 
