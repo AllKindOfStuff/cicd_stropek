@@ -40,3 +40,6 @@ jobs:
       - name: Build the App
         run: dotnet build -c Release --no-restore
       
+      # Step für Testläufe hinzufügen
+      - name: Run automated tests
+        run: dotnet test -c Release --no-build
