@@ -1,0 +1,11 @@
+# name: ist der Name des Workflows, kann selbst gewählt werden
+name: Continuous Integration and WDeployment
+
+# Festlegen wann diese Github Action laufen soll
+on: 
+  # immer wenn jemand Code in das Repo push wird es ausgeführt
+  push:
+    # immer wenn jemand Code in den main - Branch pusth, CI/CD wird gestartet
+    branches:
+      - main 
+      
