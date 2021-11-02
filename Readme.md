@@ -82,7 +82,6 @@ https://youtu.be/ySVsLE0XWQA
   - 21:40 Hinweis: you can connect sonarcloud.io to your github account --> scans your code for bugs, vulneratbilites and code smells in more than 20 programming languages
     - There is a github action called sonarcloud-scan which you can use 
 
-
 ## 22:02 Now switch from Continuous Integration to Continuous Deployment
 - Take the build results and put them into the target environment (in our case azure)
 - Create an App service plan in azure
@@ -131,3 +130,19 @@ Veröffentlichen: Code Runtimestapel:
 
 # Mitschrift C# ASP.NET 5 - CI/CD With GitHub Actions - Part 3
 https://youtu.be/MhEa8fENJqM
+- we going to use a Database and so we need to run Integration Tests which are using a database
+- Integration Tests vs. Unit Tests
+  - Majority should be **Unit Tests** -> small tests which just test a small piece of code, just small algorithms
+  - Integartion tests are tests which require a larger setup, e.g. your api, your application logic and a database
+    - you shouldn't overuse integration test
+- Our Focus today is CI/CD, so we just write a dummy test
+  - The question is, how can we get a temporary databse in Github Actions when we are running our tests
+- Go To Manage Nuget Packages
+  - look fo MicrosoftEntityFrameworkCore.SqlServer and install it.
+  - look fo MicrosoftEntityFrameworkCore.Design and install it.
+  - add a class called Data.cs to your project (not to the test project)
+    - change the code as described in the video. ends at 10:50
+  - add a Controller 
+    - click on the Controllers Folder and add an "API Controller Empty" and acll it "CustomersControllers.cs"
+      - Add the Code from 11:30 - 13:35
+- ** stopped at 13:35, without the Sourcecode the API ist not running, have to check a Video about an easy Webapi first and then I can work on here **
